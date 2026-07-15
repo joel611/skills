@@ -1,7 +1,24 @@
-## Joel Personal Skills
+## Joel Skills
 
-heavy insprite by Matt pocock skills
+heavy insprite by Matt pocock skills, filling the gap of my perference.
 
+## Install
+
+Via [skills.sh](https://skills.sh):
+
+```bash
+npx skills add joel611/skills -a claude-code
+```
+
+Installs to `.claude/skills/` (project scope). Pass `-g` for `~/.claude/skills/` (global).
+
+Install a single skill:
+
+```bash
+npx skills add joel611/skills --skill github-tickets -a claude-code
+```
+
+List without installing: add `--list`. Remove: `npx skills remove <skill-name> -a claude-code`.
 
 ## Skill list
 
