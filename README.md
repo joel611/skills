@@ -1,6 +1,6 @@
 ## Joel Skills
 
-heavy insprite by Matt pocock skills, filling the gap of my perference.
+heavily inspite by [Matt Pocock skills](https://github.com/mattpocock/skills), fill the gap for my perference.
 
 ## Install
 
@@ -8,6 +8,8 @@ Via [skills.sh](https://skills.sh):
 
 ```bash
 npx skills add joel611/skills -a claude-code
+
+npx skills add https://github.com/joel611/skills
 ```
 
 Installs to `.claude/skills/` (project scope). Pass `-g` for `~/.claude/skills/` (global).
@@ -23,3 +25,4 @@ List without installing: add `--list`. Remove: `npx skills remove <skill-name> -
 ## Skill list
 
 [github-tickets](/skills/github-tickets/SKILL.md) - supplement `to-tickets` skill to create breakdown issue under sub issue of spec, not only parent.
+[pr-description](/skills/pr-description/SKILL.md) - standardlise pull request description
