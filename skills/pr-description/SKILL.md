@@ -1,4 +1,3 @@
-
 ---
 name: pr-description
 description: PR description template for this repo. Use whenever creating or editing a PR body (gh pr create, gh pr edit) so related GitHub issues auto-close on merge.
@@ -6,19 +5,19 @@ description: PR description template for this repo. Use whenever creating or edi
 
 # PR description template
 
-Every PR that resolves one or more issues must auto-close them on merge via GitHub's closing keywords.
+PR resolve issue(s) must auto-close on merge via GitHub closing keywords.
 
 ## Rule
 
-The **first line** of the PR body must be a closing statement, before `## Summary`:
+**First line** of PR body must be closing statement, before `## Summary`:
 
 ```
 Closes #<N>[, #<M>, ...]
 ```
 
-- List every issue this PR fully resolves. Use `Closes` (not `Fixes`/`Resolves` — pick one verb, keep it consistent across the repo).
-- Only list issues actually resolved by this PR's diff. An issue referenced but deliberately deferred (see any ADR marking it out of scope) is mentioned in prose, not in the closing line.
-- No issues resolved (e.g. a docs-only or infra-only PR) → omit the line entirely, don't write `Closes` with nothing after it.
+- List every issue this PR fully resolves. Use `Closes` (not `Fixes`/`Resolves` — pick one verb, keep consistent across repo).
+- Only list issues actually resolved by this PR's diff. Issue referenced but deliberately deferred (see ADR marking out of scope) goes in prose, not closing line.
+- No issues resolved (docs-only or infra-only PR) → omit line entirely, don't write `Closes` with nothing after it.
 
 ## Template
 
