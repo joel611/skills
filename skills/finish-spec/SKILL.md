@@ -27,7 +27,7 @@ disable-model-invocation: true
 
 4. **Report, then decide and act:**
    - Display the verdict table (below) to the user and ask them to confirm before closing the spec — even if every ticket passes.
-   - Every ticket passes all three, and the user confirms → comment the verdict table on the spec issue, then `gh issue close <NUMBER> --comment "..."`.
+   - Every ticket passes all three, and the user confirms → `gh issue close <NUMBER> --comment "<verdict table>"`.
    - Any ticket open, off-spec, or overengineered, or the user declines → do not close. Comment the per-ticket gaps on the spec issue instead. For each failing ticket, apply a label from this repo's triage vocabulary (`triage-labels.md`) — `needs-triage` if the failure needs a maintainer's call, otherwise leave `ready-for-agent` for a straight redo.
 
 <verdict-template>
