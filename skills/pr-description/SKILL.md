@@ -12,17 +12,19 @@ PR resolve issue(s) must auto-close on merge via GitHub closing keywords.
 **First line** of PR body must be closing statement, before `## Summary`:
 
 ```
-Closes #<N>[, #<M>, ...]
+Closes #<N>[, closes #<M>, ...]
 ```
 
+- GitHub only auto-closes an issue if keyword precedes *that* issue number. `Closes #9, #10` closes #9 only — #10 silently stays open. Repeat keyword before each: `Closes #9, closes #10`.
 - List every issue this PR fully resolves. Use `Closes` (not `Fixes`/`Resolves` — pick one verb, keep consistent across repo).
 - Only list issues actually resolved by this PR's diff. Issue referenced but deliberately deferred (see ADR marking out of scope) goes in prose, not closing line.
 - No issues resolved (docs-only or infra-only PR) → omit line entirely, don't write `Closes` with nothing after it.
+- Keywords only take effect when PR targets repo's default branch — targeting any other branch, they're ignored and merging has no effect on the issues.
 
 ## Template
 
 ```md
-Closes #<N>, #<M>
+Closes #<N>, closes #<M>
 
 ## Summary
 - <what changed and why, 1-3 bullets>
@@ -40,7 +42,7 @@ https://claude.ai/code/session_017QWhHHbUxYJ3kusvFbqUDu
 ## Example
 
 ```md
-Closes #9, #10, #15, #16
+Closes #9, closes #10, closes #15, closes #16
 
 ## Summary
 - primaryColor/welcomeMessage/avatarUrl wired into rendering per ADR-0007
