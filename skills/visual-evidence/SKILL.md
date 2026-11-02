@@ -15,7 +15,8 @@ Capture the changed screens or flows as screenshots or video, then share them wh
    - **Playwright**: scripted, repeatable, supports screenshots and video (`record_video_dir` / `recordVideo`).
    - **agent-browser**: CLI driven by the agent, good for exploratory flows (`agent-browser` skill; use its screenshot and recording commands).
 4. **Capture.** Log in, navigate, wait for the UI to be ready (a selector, not a fixed sleep where possible), open collapsed UI before the shot. Take full-page screenshots for static states. Record video for interactions, transitions, or anything a still cannot prove. Keep clips short.
-5. **Check every file.** Read each image (and sample a video's frames or confirm it is non-empty and plays) and confirm it shows the change. Redo blank or wrong captures.
+   For video of an interaction, show the cursor (see [Video with a visible cursor](#video-with-a-visible-cursor)). A clip where nothing visibly moves does not prove the flow.
+5. **Check every file.** Read each image and confirm it shows the change. For video, a non-empty file is not enough: tile sampled frames into one image and read it (`ffmpeg -i clip.webm -vf "fps=1/2.5,scale=640:-1,tile=3x3" -frames:v 1 sheet.png`). Confirm the cursor shows, the key states appear, there is no long dead stretch, and the duration is plausible. Redo blank or wrong captures.
 6. **Share.** On GitHub (PR or issue), follow [references/github-attach.md](references/github-attach.md). Elsewhere, use that destination's upload path.
 7. **Clean up.** Stop servers you started and confirm `git status` is clean. Captures and seed scripts never go in the repo.
 
@@ -41,5 +42,16 @@ with sync_playwright() as p:
     ctx.close()                                              # flushes the .webm
     b.close()
 ```
+
+## Video with a visible cursor
+
+Playwright video does not draw the pointer, and `agent-browser record` (even with `--cursor`) can leave it static, run long with dead time, and fail on popovers that stay in the DOM. For a demo clip, script it in Playwright and draw the cursor yourself:
+
+- Log in in a throwaway context with no video, save `storage_state`, then record in a second context that loads it, so the clip starts on the page.
+- `add_init_script` an overlay: a fixed, `pointer-events:none`, max-`z-index` arrow that follows `mousemove`, plus a ring that shows on `mousedown` and hides on `mouseup`.
+- Click through one helper: scroll the element into view, `mouse.move(cx, cy, steps=30)`, wait about 400 ms, `mouse.down()`, short wait, `mouse.up()`. Pause a beat after each step. Type with `keyboard.type(text, delay=90)`.
+- Wait on UI state (`wait_for`), not fixed sleeps, and end on the result for a few seconds.
+- Start from [references/cursor-video.py](references/cursor-video.py): the overlay, the `go()` click helper and the login-then-record setup, with placeholders for the flow. Copy it to the temp folder and fill it in.
+- Run it with a Python/Node that has Playwright installed. The `playwright` CLI's shebang names that interpreter.
 
 Video is written on `ctx.close()` as `.webm`. Convert with `ffmpeg -i in.webm -c:v libx264 -pix_fmt yuv420p out.mp4` if the destination will not play it (H.264 is the most compatible codec).
