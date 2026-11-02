@@ -13,6 +13,11 @@ Source: [Attaching files with GitHub CLI](https://docs.github.com/en/enterprise-
 - Size limits (GitHub upload limits, not stated separately for the CLI): images 10 MB; video 10 MB on free plans, 100 MB on paid. Trim or re-encode larger clips.
 - Public repos serve uploads without authentication. Do not capture secrets, real user data, or tokens.
 
+## Body vs comments
+
+- 2 or fewer images/videos total: may go in the PR body.
+- More than 2: do NOT put any in the PR body. Keep the body text-only and post the media as PR comments (`gh pr comment`) as supplements. Group related captures per comment; the body may mention that evidence is in the comments.
+
 ## Example
 
 ```bash
