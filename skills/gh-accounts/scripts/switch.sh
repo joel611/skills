@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Switch the active `gh` account to match the current repo's git remote.
 #
-# Usage: switch.sh [--print] [--remote NAME] [--user USER]
+# Usage: switch.sh [--print | --token] [--remote NAME] [--user USER]
+#   --token        print the resolved account's token (use as GH_TOKEN=$(...) gh ...);
+#                  changes no global state, so other agents cannot interfere
 #   --print        only print the resolved gh user, do not switch
 #   --remote NAME  remote to read (default: origin)
 #   --user USER    skip detection, switch to USER
@@ -19,13 +21,15 @@ set -euo pipefail
 
 remote=origin
 print_only=0
+token_only=0
 user=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --print) print_only=1 ;;
+    --token) token_only=1 ;;
     --remote) remote=$2; shift ;;
     --user) user=$2; shift ;;
-    -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,18p' "$0"; exit 0 ;;
     *) echo "unknown arg: $1" >&2; exit 2 ;;
   esac
   shift
@@ -72,15 +76,21 @@ if [ "$print_only" = 1 ]; then
 fi
 
 # gh auth status prints "Logged in to github.com account <user>" per account.
-if ! gh auth status 2>&1 | grep -q "account $user "; then
+# Drop GH_TOKEN so a token inherited from the environment can't mask the stored accounts.
+if ! env -u GH_TOKEN gh auth status 2>&1 | grep -q "account $user "; then
   echo "gh-accounts: '$user' not logged in to gh; run: gh auth login" >&2
   exit 3
 fi
 
-active=$(gh api user --jq .login 2>/dev/null || true)
+if [ "$token_only" = 1 ]; then
+  env -u GH_TOKEN gh auth token --hostname github.com --user "$user"
+  exit 0
+fi
+
+active=$(env -u GH_TOKEN gh api user --jq .login 2>/dev/null || true)
 if [ "$active" = "$user" ]; then
   echo "gh-accounts: already $user"
 else
-  gh auth switch --hostname github.com --user "$user"
+  env -u GH_TOKEN gh auth switch --hostname github.com --user "$user"
   echo "gh-accounts: switched to $user"
 fi
