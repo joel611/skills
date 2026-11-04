@@ -41,7 +41,19 @@ The `<gh-user>` greeted by `ssh -T` is the user to pass to `gh auth switch`. If 
 
 Once resolved in a session, remember the mapping and skip the `ssh -T` call. If the user keeps a standing map (in memory or CLAUDE.md), prefer it.
 
-## Before any `gh` command
+## Fast path: the script
+
+`scripts/switch.sh` (next to this file) does everything below in one call: reads the remote, resolves the alias with `ssh -T` (cached in `~/.cache/gh-accounts/`), checks the user is logged in, and switches only if needed. Run it from inside the repo before any `gh` command:
+
+```bash
+<skill-dir>/scripts/switch.sh            # switch to the repo's account
+<skill-dir>/scripts/switch.sh --print    # just print the resolved gh user (use with GH_TOKEN=$(gh auth token --user "$(...)"))
+<skill-dir>/scripts/switch.sh --user X   # skip detection
+```
+
+Exit 2 = cannot resolve (HTTPS remote with no owner entry, no remote, no SSH greeting); exit 3 = resolved user is not logged in to `gh`. For HTTPS remotes it reads an optional owner map, one `owner=gh-user` per line, in `~/.config/gh-accounts/owners`. If the cache goes stale (key moved to another account), delete the alias file in the cache dir.
+
+## Before any `gh` command (manual steps)
 
 1. Read the remote: `git remote get-url origin` (run in the repo's directory; worktrees share the remote).
 2. Extract the host alias from the SSH URL — the part between `@` and `:`.
