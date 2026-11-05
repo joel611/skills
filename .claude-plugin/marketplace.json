@@ -1,0 +1,16 @@
+{
+  "name": "joel-plugins",
+  "owner": {
+    "name": "Joel Chan",
+    "email": "chanhokyim@gmail.com"
+  },
+  "description": "Joel's skills and Claude Code plugins",
+  "plugins": [
+    {
+      "name": "env-redact",
+      "source": "./claude-code/env-redact",
+      "description": "Redacts secret values from .env files out of every tool result the model reads",
+      "category": "claude"
+    }
+  ]
+}
