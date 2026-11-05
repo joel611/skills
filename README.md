@@ -32,4 +32,5 @@ The [`claude-code/`](/claude-code) folder is a Claude Code plugin marketplace (`
 - [github-tickets](/skills/github-tickets/SKILL.md) - supplement `to-tickets` skill, create breakdown issue under sub issue of spec, not only parent.
 - [pr-description](/skills/pr-description/SKILL.md) - standardize pull request description
 - [finish-spec](/skills/finish-spec/SKILL.md) - verify spec tickets are complete and on-spec, then close spec issue
+- [gh-accounts](/skills/gh-accounts/SKILL.md) - pick the right GitHub account (personal vs work) from the repo's SSH remote alias before using `gh`
 - [visual-evidence](/skills/visual-evidence/SKILL.md) - capture screenshots or video of UI changes and share as PR/issue evidence
