@@ -1,0 +1,1 @@
+{ "name": "pr-diff", "version": "0.1.0", "description": "Pane beside the chat: PR status bar, changed-file list, Enter for the file's diff, nvim keymap", "types": "./types/index.d.ts", "author": { "name": "Joel Chan" } }

@@ -21,11 +21,13 @@ The [`claude-code/`](/claude-code) folder is a Claude Code plugin marketplace (`
 ```
 /plugin marketplace add joel611/skills
 /plugin install env-redact@joel-plugins
+/plugin install pr-diff@joel-plugins
 ```
 
 ## Plugin list
 
 - [env-redact](/claude-code/env-redact/README.md) - redact `.env` secret values from every tool result the model reads
+- [pr-diff](/claude-code/pr-diff/README.md) - pane beside the chat with the branch PR status, changed files and diff, nvim keymap
 
 ## Skill list
 
