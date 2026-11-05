@@ -18,6 +18,7 @@ The `Open` button (top right) opens the PR in the browser; with the pane focused
 | `}` `{` | | next / prev file |
 | `q` `h` `Backspace` | | back to list |
 | `r` | refresh | refresh |
+| `Q` | close pane | close pane |
 | `O` | open PR in browser | open PR in browser |
 
 Diffs over 40,000 characters are cut (footer says `(cut)`).
