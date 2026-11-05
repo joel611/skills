@@ -118,7 +118,7 @@ async function refresh($: any) {
 
 
 export const register: Register = on => {
-  const show = () => ({ id: PANE, title: 'PR diff', focus: true as const, closeOnEscape: true as const })
+  const show = () => ({ id: PANE, title: 'PR diff', focus: true as const, closeOnEscape: true as const, backgroundColor: 'transparent' as const })
 
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'pr-diff', description: 'Show this branch’s PR status and diff in a pane' })
@@ -157,9 +157,9 @@ export const register: Register = on => {
     return (
       <Box flexDirection="column">
         <Box flexDirection="row" justifyContent="flex-end" gap={2}>
-          <Button key="refresh" label="Refresh" hotkey="r" onPress={() => void refresh($)} />
-          <Button key="open" label="Open" hotkey="o" onPress={() => void gh($, ['pr', 'view', '--web'])} />
-          <Button key="close" label="Close" hotkey="c" onPress={() => void $.ui.close({ id: PANE })} />
+          <Button key="refresh" plain dimColor label="Refresh" hotkey="r" onPress={() => void refresh($)} />
+          <Button key="open" plain dimColor label="Open" hotkey="o" onPress={() => void gh($, ['pr', 'view', '--web'])} />
+          <Button key="close" plain dimColor label="Close" hotkey="c" onPress={() => void $.ui.close({ id: PANE })} />
         </Box>
         <Client key="view" module="./view.tsx" props={d} height={rows - 1} />
       </Box>
