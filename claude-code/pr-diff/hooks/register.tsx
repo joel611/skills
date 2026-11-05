@@ -148,12 +148,15 @@ export const register: Register = on => {
   })
 
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
-    const { Box, Client } = $.ui.resolve(e)
+    const { Box, Button, Client } = $.ui.resolve(e)
     const d = await read($, data)
     const rows = e.props.scroll?.bodyRows ?? e.viewport?.rows ?? 24
     return (
       <Box flexDirection="column">
-        <Client key="view" module="./view.tsx" props={d} height={rows} />
+        <Box justifyContent="flex-end">
+          <Button key="open" label="Open" hotkey="o" autoFocus onPress={() => void gh($, ['pr', 'view', '--web'])} />
+        </Box>
+        <Client key="view" module="./view.tsx" props={d} height={rows - 1} />
       </Box>
     )
   })
