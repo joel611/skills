@@ -124,7 +124,7 @@ const View: ClientModule<PrData, S> = (d, surface) => {
           : (shown as PrData['files']).map((f, i) => {
               const sel = st.top + i === st.cur
               return (
-                <Text inverse={sel}>
+                <Text bold={sel}>
                   {cut(`${sel ? '>' : ' '} ${f.status} ${f.path}  +${f.add} −${f.del}`, cols)}
                 </Text>
               )
