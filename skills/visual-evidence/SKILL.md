@@ -15,6 +15,7 @@ Capture the changed screens or flows as screenshots or video, then share them wh
    - **Playwright**: scripted, repeatable, supports screenshots and video (`record_video_dir` / `recordVideo`).
    - **agent-browser**: CLI driven by the agent, good for exploratory flows (`agent-browser` skill; use its screenshot and recording commands).
 4. **Capture.** Log in, navigate, wait for the UI to be ready (a selector, not a fixed sleep where possible), open collapsed UI before the shot. Take full-page screenshots for static states. Record video for interactions, transitions, or anything a still cannot prove. Keep clips short.
+   For a bug fix or visual change, capture the same view on the base branch too (same viewport, data and steps) and share the two as a labeled before/after pair.
    For video of an interaction, show the cursor (see [Video with a visible cursor](#video-with-a-visible-cursor)). A clip where nothing visibly moves does not prove the flow.
 5. **Check every file.** Read each image and confirm it shows the change. For video, a non-empty file is not enough: tile sampled frames into one image and read it (`ffmpeg -i clip.webm -vf "fps=1/2.5,scale=640:-1,tile=3x3" -frames:v 1 sheet.png`). Confirm the cursor shows, the key states appear, there is no long dead stretch, and the duration is plausible. Redo blank or wrong captures.
 6. **Share.** On GitHub (PR or issue), follow [references/github-attach.md](references/github-attach.md). Elsewhere, use that destination's upload path. For a PR, put at most 2 images/videos in the body; with more than 2, keep them out of the body and post them as PR comments (see the reference).
@@ -24,32 +25,10 @@ Capture the changed screens or flows as screenshots or video, then share them wh
 
 Save to a temp folder unless the user says where. Use `$CLAUDE_JOB_DIR/tmp` when set, otherwise `mktemp -d`. Never plain `/tmp` in a shared session (parallel jobs clobber each other). If the user names a folder, use it exactly.
 
-## Playwright
-
-Install per the repo (`npx playwright install chromium`, or the Python package). Skeleton (Python shown, same API in Node):
-
-```python
-from playwright.sync_api import sync_playwright
-
-with sync_playwright() as p:
-    b = p.chromium.launch()
-    ctx = b.new_context(viewport={"width": 1280, "height": 900},
-                        record_video_dir="<tmp>/video")      # drop for stills only
-    pg = ctx.new_page()
-    pg.goto("<base-url>/<path>")
-    pg.wait_for_selector("<ready-selector>")
-    pg.screenshot(path="<tmp>/screen.png", full_page=True)
-    ctx.close()                                              # flushes the .webm
-    b.close()
-```
-
 ## Video with a visible cursor
 
 Playwright video does not draw the pointer, and `agent-browser record` (even with `--cursor`) can leave it static, run long with dead time, and fail on popovers that stay in the DOM. For a demo clip, script it in Playwright and draw the cursor yourself:
 
-- Log in in a throwaway context with no video, save `storage_state`, then record in a second context that loads it, so the clip starts on the page.
-- `add_init_script` an overlay: a fixed, `pointer-events:none`, max-`z-index` arrow that follows `mousemove`, plus a ring that shows on `mousedown` and hides on `mouseup`.
-- Click through one helper: scroll the element into view, `mouse.move(cx, cy, steps=30)`, wait about 400 ms, `mouse.down()`, short wait, `mouse.up()`. Pause a beat after each step. Type with `keyboard.type(text, delay=90)`.
 - Wait on UI state (`wait_for`), not fixed sleeps, and end on the result for a few seconds.
 - Start from [references/cursor-video.py](references/cursor-video.py): the overlay, the `go()` click helper and the login-then-record setup, with placeholders for the flow. Copy it to the temp folder and fill it in.
 - Run it with a Python/Node that has Playwright installed. The `playwright` CLI's shebang names that interpreter.
