@@ -18,7 +18,7 @@ Capture the changed screens or flows as screenshots or video, then share them wh
    For a bug fix or visual change, capture the same view on the base branch too (same viewport, data and steps) and share the two as a labeled before/after pair.
    For video of an interaction, show the cursor (see [Video with a visible cursor](#video-with-a-visible-cursor)). A clip where nothing visibly moves does not prove the flow.
 5. **Check every file.** Read each image and confirm it shows the change. For video, a non-empty file is not enough: tile sampled frames into one image and read it (`ffmpeg -i clip.webm -vf "fps=1/2.5,scale=640:-1,tile=3x3" -frames:v 1 sheet.png`). Confirm the cursor shows, the key states appear, there is no long dead stretch, and the duration is plausible. Redo blank or wrong captures.
-6. **Share.** On GitHub (PR or issue), follow [references/github-attach.md](references/github-attach.md). Elsewhere, use that destination's upload path. For a PR, put at most 2 images/videos in the body; with more than 2, keep them out of the body and post them as PR comments (see the reference).
+6. **Share.** On GitHub (PR or issue), follow [references/github-attach.md](references/github-attach.md). Elsewhere, use that destination's upload path.
 7. **Clean up.** Stop servers you started and confirm `git status` is clean. Captures and seed scripts never go in the repo.
 
 ## Where files go
