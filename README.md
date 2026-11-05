@@ -29,7 +29,12 @@ The [`claude-code/`](/claude-code) folder is a Claude Code plugin marketplace (`
 
 ## Skill list
 
-- [github-tickets](/skills/github-tickets/SKILL.md) - supplement `to-tickets` skill, create breakdown issue under sub issue of spec, not only parent.
-- [pr-description](/skills/pr-description/SKILL.md) - standardize pull request description
-- [finish-spec](/skills/finish-spec/SKILL.md) - verify spec tickets are complete and on-spec, then close spec issue
 - [visual-evidence](/skills/visual-evidence/SKILL.md) - capture screenshots or video of UI changes and share as PR/issue evidence
+
+## Deprecated skill list
+
+Kept in [`skills/deprecated/`](/skills/deprecated), no longer maintained.
+
+- [github-tickets](/skills/deprecated/github-tickets/SKILL.md) - supplement `to-tickets` skill, create breakdown issue under sub issue of spec, not only parent.
+- [pr-description](/skills/deprecated/pr-description/SKILL.md) - standardize pull request description
+- [finish-spec](/skills/deprecated/finish-spec/SKILL.md) - verify spec tickets are complete and on-spec, then close spec issue
