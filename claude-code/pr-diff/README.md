@@ -4,7 +4,7 @@ Pane beside the chat for the current branch's PR. Run `/pr-diff`. Top bar shows 
 
 Needs `gh` signed in. If the `gh-accounts` skill is installed, `gh` is scoped to the repo's account.
 
-Click the pane (or ctrl+x tab) to give it the keys; Escape hands them back.
+The `Open` button (top right) opens the PR in the browser; with the pane focused, `o` presses it. `ctrl+x Tab` focuses the pane onto that button; Tab again or a click on the list gives the list the keys. Escape hands the keyboard back to the prompt.
 
 | Key | File list | Diff |
 | --- | --- | --- |
