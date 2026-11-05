@@ -4,6 +4,8 @@ Heavy inspire by [Matt Pocock skills](https://github.com/mattpocock/skills), fil
 
 ## Install
 
+### Skills
+
 Via [skills.sh](https://skills.sh):
 
 ```bash
@@ -11,6 +13,19 @@ npx skills add joel611/skills
 
 npx skills add https://github.com/joel611/skills
 ```
+
+### Claude Code plugins
+
+The [`claude-code/`](/claude-code) folder is a Claude Code plugin marketplace (`joel-plugins`). Only plugins in that folder are installed this way; skills still use skills.sh above.
+
+```
+/plugin marketplace add joel611/skills
+/plugin install env-redact@joel-plugins
+```
+
+## Plugin list
+
+- [env-redact](/claude-code/env-redact/README.md) - redact `.env` secret values from every tool result the model reads
 
 ## Skill list
 
