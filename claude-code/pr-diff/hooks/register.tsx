@@ -118,7 +118,7 @@ async function refresh($: any) {
 
 
 export const register: Register = on => {
-  const show = () => ({ id: PANE, title: 'PR diff', focus: true as const })
+  const show = () => ({ id: PANE, title: 'PR diff', focus: true as const, closeOnEscape: true as const })
 
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'pr-diff', description: 'Show this branch’s PR status and diff in a pane' })
@@ -128,6 +128,8 @@ export const register: Register = on => {
   on('command.run', { command: 'pr-diff' }, async $ => {
     await $.ui.open(show())
     void refresh($)
+    // Ask the focus ring to start on the list view, so j/k work at once.
+    await $.ui.focus({ requestId: PANE, key: 'view' }).catch(() => undefined)
     return { text: 'PR diff pane opened. Click it (or ctrl+x tab) to give it the keys.' }
   })
 
@@ -154,8 +156,10 @@ export const register: Register = on => {
     const rows = e.props.scroll?.bodyRows ?? e.viewport?.rows ?? 24
     return (
       <Box flexDirection="column">
-        <Box justifyContent="flex-end">
-          <Button key="open" label="Open" hotkey="o" autoFocus onPress={() => void gh($, ['pr', 'view', '--web'])} />
+        <Box flexDirection="row" justifyContent="flex-end" gap={2}>
+          <Button key="refresh" label="Refresh" hotkey="r" onPress={() => void refresh($)} />
+          <Button key="open" label="Open" hotkey="o" onPress={() => void gh($, ['pr', 'view', '--web'])} />
+          <Button key="close" label="Close" hotkey="c" onPress={() => void $.ui.close({ id: PANE })} />
         </Box>
         <Client key="view" module="./view.tsx" props={d} height={rows - 1} />
       </Box>

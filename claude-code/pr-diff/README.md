@@ -4,7 +4,7 @@ Pane beside the chat for the current branch's PR. Run `/pr-diff`. Top bar shows 
 
 Needs `gh` signed in. If the `gh-accounts` skill is installed, `gh` is scoped to the repo's account.
 
-The `Open` button (top right) opens the PR in the browser; with the pane focused, `o` presses it. `ctrl+x Tab` focuses the pane onto that button; Tab again or a click on the list gives the list the keys. Escape hands the keyboard back to the prompt.
+Top-right buttons: `Refresh` (`r`), `Open` (`o`, PR in browser), `Close` (`c`). They are real focus stops: `ctrl+x Tab` focuses the pane and `/pr-diff` asks for focus on open. Escape closes the pane and returns the keyboard to the prompt. The nvim keys below need the list view focused: click it if they do nothing.
 
 | Key | File list | Diff |
 | --- | --- | --- |
