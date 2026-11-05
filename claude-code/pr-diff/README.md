@@ -18,5 +18,6 @@ Click the pane (or ctrl+x tab) to give it the keys; Escape hands them back.
 | `}` `{` | | next / prev file |
 | `q` `h` `Backspace` | | back to list |
 | `r` | refresh | refresh |
+| `O` | open PR in browser | open PR in browser |
 
 Diffs over 40,000 characters are cut (footer says `(cut)`).

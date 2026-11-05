@@ -41,6 +41,10 @@ const View: ClientModule<PrData, S> = (d, surface) => {
         surface.post({ type: 'open', path: f.path })
       }
     }
+    if (key === 'O') {
+      surface.post({ type: 'web' })
+      return set({})
+    }
     if (key === 'r') {
       surface.post({ type: 'refresh' })
       return set({})
@@ -110,8 +114,8 @@ const View: ClientModule<PrData, S> = (d, surface) => {
     : d.files.slice(st.top, st.top + body)
 
   const foot = inDiff
-    ? `${d.open!.path}  ${Math.min(lines.length, scroll + 1)}/${lines.length}${d.open!.isCut ? ' (cut)' : ''}  j/k ^d/^u gg/G [ ] hunk  { } file  q back`
-    : `${d.files.length ? st.cur + 1 : 0}/${d.files.length} files  j/k gg/G ^d/^u H/M/L  ⏎/l open  r refresh${st.count ? '  ' + st.count : ''}`
+    ? `${d.open!.path}  ${Math.min(lines.length, scroll + 1)}/${lines.length}${d.open!.isCut ? ' (cut)' : ''}  j/k ^d/^u gg/G [ ] hunk  { } file  q back  O web`
+    : `${d.files.length ? st.cur + 1 : 0}/${d.files.length} files  j/k gg/G ^d/^u H/M/L  ⏎/l open  r refresh  O web${st.count ? '  ' + st.count : ''}`
 
   return (
     <Box flexDirection="column">

@@ -134,6 +134,7 @@ export const register: Register = on => {
   on('ui.message', async ($, e, next) => {
     const m = e.data as { type?: string; path?: string } | null
     if (m?.type === 'refresh') void refresh($)
+    else if (m?.type === 'web') void gh($, ['pr', 'view', '--web'])
     else if (m?.type === 'close') await update($, data, d => ({ ...d, open: undefined }))
     else if (m?.type === 'open' && m.path) {
       const full = patches.get(m.path) ?? ''
