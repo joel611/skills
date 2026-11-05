@@ -1,6 +1,6 @@
 ---
 name: gh-accounts
-description: Run before every `gh` command when the machine has multiple GitHub accounts. Resolves the repo's account from its git remote and scopes `gh` to it via `GH_TOKEN`. Also use on `Could not resolve to a Repository`, 404 on an existing repo, or "wrong account" errors, and when asked to set up multiple GitHub accounts.
+description: Run before every `gh` command. Resolves the repo's account from its git remote and scopes `gh` to it via `GH_TOKEN`. Also use on `Could not resolve to a Repository`, 404 on an existing repo, or "wrong account" errors, and when asked to set up multiple GitHub accounts.
 ---
 
 # gh-accounts
