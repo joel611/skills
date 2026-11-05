@@ -1,0 +1,6 @@
+{
+  "name": "env-redact",
+  "version": "0.1.0",
+  "description": "Redacts secret values from .env files out of every tool result the model reads.",
+  "author": { "name": "Joel Chan" }
+}
