@@ -1,0 +1,16 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Workflow",
+      "description": "Git and PR workflow helpers.",
+      "skills": ["gh-accounts", "visual-evidence"]
+    },
+    {
+      "title": "Deprecated",
+      "description": "No longer maintained; covered by newer skills.",
+      "skills": ["github-tickets", "pr-description", "finish-spec"]
+    }
+  ]
+}
