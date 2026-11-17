@@ -30,6 +30,7 @@ The [`claude-code/`](/claude-code) folder is a Claude Code plugin marketplace (`
 ## Skill list
 
 - [gh-accounts](/skills/gh-accounts/SKILL.md) - pick the right GitHub account (personal vs work) from the repo's SSH remote alias before using `gh`
+- [setup-worktrunk](/skills/setup-worktrunk/SKILL.md) - set up worktrunk so each worktree copies its env and gets its own ports, .env and docker project for parallel agents
 - [visual-evidence](/skills/visual-evidence/SKILL.md) - capture screenshots or video of UI changes and share as PR/issue evidence
 
 ## Deprecated skill list
