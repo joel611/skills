@@ -2,6 +2,10 @@
 
 Source: [Attaching files with GitHub CLI](https://docs.github.com/en/enterprise-cloud@latest/github-cli/github-cli/attaching-files-with-github-cli) (Enterprise Cloud docs; they do not mention Enterprise Server).
 
+## Requires gh >= 2.99.0
+
+`--attach` first shipped in [gh v2.99.0](https://github.com/cli/cli/releases/tag/v2.99.0) (2026-09-01). v2.98.0 and older reject the flag. Check with `gh --version`; upgrade before use.
+
 ## Rules
 
 - Works on `gh pr create|edit|comment` and `gh issue create|edit|comment`. Needs push access. Only images and media (png, gif, jpg, svg, mp4, mov, webm).
