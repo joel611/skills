@@ -5,7 +5,7 @@
     {
       "title": "Workflow",
       "description": "Git and PR workflow helpers.",
-      "skills": ["gh-accounts", "visual-evidence"]
+      "skills": ["gh-accounts", "setup-worktrunk", "visual-evidence"]
     },
     {
       "title": "Deprecated",
